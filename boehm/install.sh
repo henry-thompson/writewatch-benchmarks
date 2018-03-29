@@ -13,9 +13,6 @@ fi
 
 echo "=== CONFIGURING GC INSTALLATION ==="
 
-outdir=$PWD/gc
-rm -rf $outdir
-
 if [ ! -d "./bdwgc" ]; then
    git clone https://github.com/henry-thompson/bdwgc
    cd bdwgc
@@ -45,7 +42,7 @@ else
 fi
 
 ./autogen.sh
-./configure --prefix=$outdir
+./configure --disable-threads
 
 if [ "$1" = "-build-gc" ]; then
     shift
