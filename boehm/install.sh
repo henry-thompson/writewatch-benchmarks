@@ -33,7 +33,7 @@ else
       shift
       # This is a REALLY bad way of setting the buffer length, but will do for
       # now until I figure out how that MAKEFILE works...
-      sed -i '' 's/# define GC_FBSD_MWW_BUF_LEN.*$/# define GC_FBSD_MWW_BUF_LEN '"$1"'/' /root/bdwgc/os_dep.c
+      sed -i '' 's/# define GC_FBSD_MWW_BUF_LEN.*$/# define GC_FBSD_MWW_BUF_LEN '"$1"'/' ./os_dep.c
       echo "Buffer size: $1"
       shift
     else
