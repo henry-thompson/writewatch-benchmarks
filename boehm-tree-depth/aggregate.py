@@ -27,7 +27,8 @@ def get_stats(treesize, heapsizes, timings):
 with open(argv[1]) as f:
   f.readline()
 
-  stats = {} 
+  timings = {}
+  heapsizes = {}
   for line in f.readlines():
     stretchDepth, longDepth, array, minDepth, maxDepth, gcs, heap, time = line.split('\t')
 
@@ -35,14 +36,15 @@ with open(argv[1]) as f:
     heap = int(heap.strip())
     time = float(time.strip())
 
-    if not stats.has_key(longDepth):
-        stats[longDepth] = {}
-        stats[longDepth].timings = []
-        stats[longDepth].heapsizes = []
+    if not timings.has_key(longDepth):
+        timings[longDepth] = []
 
-    stats[longDepth].timings.append(time)
-    stats[longDepth].heapsizes.append(heap)
+    if not heapsizes.has_key(longDepth):
+        heapsizes[longDepth] = []
+
+    timings[longDepth].append(time)
+    heapsizes[longDepth].append(heap)
 
   print "Tree Depth\tMean Heap Size (bytes)\tStdDev Heap Size (bytes)\tMean Time (ms)\tStdDev Time (ms)"
-  for depth in sorted(stats.iterkeys()):
-    get_stats(depth, stats[depth].heapsizes, stats[depth].timings)
+  for depth in sorted(timings.iterkeys()):
+    get_stats(depth, timings[depth], heapsizes[depth])
