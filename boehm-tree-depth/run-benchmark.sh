@@ -20,14 +20,18 @@ benchmark()
     python2 aggregate.py "$1.unaggregated.tsv" > "$1.tsv"
 }
 
+here="$PWD"
+cd ../boehm
+
 # Make sure benchmarker is built
-../boehm/build.sh
+./build.sh
 
 # Build and install the original GC
-../boehm/install.sh -original -build-gc
+./install.sh -original -build-gc
+cd "$here"
 benchmark "result-baseline"
 
 # Now for the new version
-../boehm/install.sh -buffer 16 -build-gc
-../boehm/build.sh
+./install.sh -buffer 16 -build-gc
+cd "$here"
 benchmark "result-writewatch"
