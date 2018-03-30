@@ -1,4 +1,5 @@
 import math
+from sys import argv
 
 def mean(data):
     return sum(data) / len(data)
@@ -23,7 +24,7 @@ def get_stats(treesize, heapsizes, timings):
                             mean(timings),
                             stdev(timings))
 
-with open('unaggregated.temp') as f:
+with open(argv[1]) as f:
   f.readline()
 
   stats = {} 

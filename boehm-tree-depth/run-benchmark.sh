@@ -17,7 +17,7 @@ benchmark()
         done
     done
 
-    python2 aggregate.py > "$1.tsv"
+    python2 aggregate.py "$1.unaggregated.temp" > "$1.tsv"
 }
 
 # Build and install the original GC
