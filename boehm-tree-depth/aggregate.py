@@ -17,8 +17,7 @@ def get_stats(treesize, heapsizes, timings):
   if not (len(heapsizes) == len(timings)):
     print "Heap and timing sample sizes differ!"
     return
-
-print timings
+  
   print "%d\t%f\t%f\t%f\t%f" % (treesize,
                             mean(heapsizes),
                             stdev(heapsizes),
