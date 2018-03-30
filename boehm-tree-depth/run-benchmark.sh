@@ -1,4 +1,4 @@
-
+#!/usr/local/bin/bash
 
 # Keeping the short-lived tree size fixed, loop over the long-lived tree
 # sizes.
