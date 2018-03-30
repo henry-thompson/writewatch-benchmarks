@@ -24,6 +24,8 @@ def get_stats(treesize, heapsizes, timings):
                             stdev(timings))
 
 with open('unaggregated.temp') as f:
+  f.readline()
+
   stats = {} 
   for line in f.readlines():
     stretchDepth, longDepth, array, minDepth, maxDepth, gcs, heap, time = line.split('\t')
