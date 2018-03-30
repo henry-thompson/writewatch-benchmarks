@@ -36,7 +36,9 @@ with open(argv[1]) as f:
     time = float(time.strip())
 
     if not stats.has_key(longDepth):
-        stats[longDepth] = { "timings": [], "heapsizes": [] }
+        stats[longDepth] = {}
+        stats[longDepth].timings = []
+        stats[longDepth].heapsizes = []
 
     stats[longDepth].timings.append(time)
     stats[longDepth].heapsizes.append(heap)
