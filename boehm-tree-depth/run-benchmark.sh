@@ -30,6 +30,7 @@ cd ../boehm
 ./install.sh -original -build-gc
 cd "$here"
 benchmark "result-baseline"
+cd ../boehm
 
 # Now for the new version
 ./install.sh -buffer 16 -build-gc
