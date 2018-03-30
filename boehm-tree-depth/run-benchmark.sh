@@ -13,11 +13,11 @@ benchmark()
         for ((kLongLivedTreeDepth=16;kLongLivedTreeDepth<=25;kLongLivedTreeDepth++));
         do
             echo "Iter $i: kLongLivedTreeDepth=$kLongLivedTreeDepth"
-            rtprio 0 ../boehm/benchmark 19 "$kLongLivedTreeDepth" >> "$1.unaggregated.temp"
+            rtprio 0 ../boehm/benchmark 19 "$kLongLivedTreeDepth" >> "$1.unaggregated.tsv"
         done
     done
 
-    python2 aggregate.py "$1.unaggregated.temp" > "$1.tsv"
+    python2 aggregate.py "$1.unaggregated.tsv" > "$1.tsv"
 }
 
 # Build and install the original GC
