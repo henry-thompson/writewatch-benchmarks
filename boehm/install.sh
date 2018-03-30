@@ -18,12 +18,11 @@ if [ ! -d "./bdwgc" ]; then
    cd bdwgc
 else
    cd bdwgc
+   git reset HEAD --hard
+   git clean -f
    git pull
    git fetch
 fi
-
-git reset HEAD --hard
-git clean -f
 
 if [ "$1" = '-original' ]; then
     shift
