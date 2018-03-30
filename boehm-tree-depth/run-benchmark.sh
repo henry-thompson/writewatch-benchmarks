@@ -22,6 +22,8 @@ benchmark()
 
 here="$PWD"
 cd ../boehm
+chmod +x ./build.sh
+chmod +x ./install.sh
 
 # Make sure benchmarker is built
 ./build.sh
