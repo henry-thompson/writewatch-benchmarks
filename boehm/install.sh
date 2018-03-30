@@ -22,6 +22,9 @@ else
    git fetch
 fi
 
+git reset HEAD --hard
+git clean -f
+
 if [ "$1" = '-original' ]; then
     shift
     git checkout master
