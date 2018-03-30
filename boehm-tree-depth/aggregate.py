@@ -11,7 +11,7 @@ def stdev(data):
   for value in data:
     stdev += (value - mu)**2
 
-  stdev = math.sqrt(stdev/len(data))
+  return math.sqrt(stdev/len(data))
 
 def get_stats(treesize, heapsizes, timings):
   if not (len(heapsizes) == len(timings)):
