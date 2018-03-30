@@ -15,8 +15,7 @@
 benchmark()
 {
   # Build the benchmarker, linking BDWGC
-  cc -I/usr/local/include benchmark.c /usr/local/lib/libgc.so -o benchmark
-  chmod +x ./benchmark
+  ./build.sh
 
   # Begin the benchmark. $1 is the file to save the content into.
 
