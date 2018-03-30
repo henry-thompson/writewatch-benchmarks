@@ -1,5 +1,16 @@
 import math
-import numpy
+
+def mean(data):
+    return sum(data) / len(data)
+
+def stdev(data):
+  stdev = 0
+  mu = mean(data)
+
+  for value in data:
+    stdev += (value - mu)**2
+
+  stdev = math.sqrt(stdev/len(data))
 
 def get_stats(treesize, heapsizes, timings):
   if not (len(heapsizes) == len(timings)):
@@ -7,10 +18,10 @@ def get_stats(treesize, heapsizes, timings):
     return
 
   print "%d\t%f\t%f\t%f\t%f" % (treesize,
-                            numpy.mean(heapsizes),
-                            numpy.std(heapsizes),
-                            numpy.mean(timings),
-                            numpy.std(timings))
+                            mean(heapsizes),
+                            stdev(heapsizes),
+                            mean(timings),
+                            stdev(timings))
 
 with open('unaggregated.temp') as f:
   stats = {} 
