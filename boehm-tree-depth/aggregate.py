@@ -18,6 +18,7 @@ def get_stats(treesize, heapsizes, timings):
     print "Heap and timing sample sizes differ!"
     return
 
+print timings
   print "%d\t%f\t%f\t%f\t%f" % (treesize,
                             mean(heapsizes),
                             stdev(heapsizes),
@@ -47,4 +48,4 @@ with open(argv[1]) as f:
 
   print "Tree Depth\tMean Heap Size (bytes)\tStdDev Heap Size (bytes)\tMean Time (ms)\tStdDev Time (ms)"
   for depth in sorted(timings.iterkeys()):
-    get_stats(depth, timings[depth], heapsizes[depth])
+    get_stats(depth, heapsizes[depth], timings[depth])
