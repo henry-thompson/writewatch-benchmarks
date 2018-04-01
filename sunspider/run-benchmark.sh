@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 
 chmod +x ./install-see.sh
-. /install-see.sh
+./install-see.sh
 
 cd ../boehm
 ./install.sh -original -build-gc
