@@ -1,10 +1,10 @@
 #!/usr/local/bin/bash
 
 chmod +x ./install-see.sh
-./install-see.sh
+sudo ./install-see.sh
 
 cd ../boehm
-./install.sh -original -build-gc
+sudo ./install.sh -original -build-gc
 
 cd ../sunspider
 chmod +x ./runone.sh
@@ -27,7 +27,7 @@ do
 done
 
 cd ../boehm
-./install.sh -build-gc
+sudo ./install.sh -build-gc
 cd ../sunspider
 
 for ((i = 1; i <= "$iters"; i++));
