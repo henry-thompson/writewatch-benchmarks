@@ -21,8 +21,9 @@ benchmark()
   for ((i = 0; i < 100; i++));
   do
     rtprio 0 ../boehm/benchmark 16 18 2>&1 | grep 'World-stopped marking took ' | sed 's/World-stopped marking took //g' | sed 's/ msec.*$//g'  >> unaggregated.log
-
   done
+  
+  python2 aggregate.py unaggregated.log > "$1"
 }
 
 original()
@@ -34,7 +35,7 @@ original()
   ./install.sh -original -build-gc
   
   cd ../pause-times
-  benchmark $1
+  benchmark "$1.baseline.tsv"
 }
 
 writewatch()
@@ -46,7 +47,7 @@ writewatch()
   ./install.sh -buffer 16 -build-gc
 
   cd ../pause-times
-  benchmark $1
+  benchmark "$1.writewatch.tsv"
 }
 
 prefix="results"
