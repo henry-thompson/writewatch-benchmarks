@@ -28,7 +28,7 @@ do
 			./benchmark w "$heapsize" "$writes" "$fragments" >> results.unaggregated.csv
 			
 			echo "Heapsize: $heapsize | Writes: $writes | Fragments: $fragments | none"
-			echo -n "$heapsize:,$writes,$fragments,none," >> results.unaggregated.csv
+			echo -n "$heapsize,$writes,$fragments,none," >> results.unaggregated.csv
 			./benchmark n "$heapsize" "$writes" "$fragments" >> results.unaggregated.csv
 		done
 
