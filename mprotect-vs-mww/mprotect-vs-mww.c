@@ -114,7 +114,10 @@ int main(int argc, char** argv)
         gettimeofday(&stop, NULL);
 
         // Output time taken (us)
-        printf("%zu\t", stop.tv_usec - start.tv_usec);
+	uint64_t start_usec = start.tv_sec * 1000000 + start.tv_usec;
+	uint64_t stop_usec = stop.tv_sec * 1000000 + stop.tv_usec;
+
+        printf("%"PRId64"\t", stop_usec - start_usec);
     }
 
     free(page_indices);
