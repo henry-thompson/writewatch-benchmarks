@@ -3,6 +3,5 @@ boehm/bdwgc/
 boehm/benchmark
 sunspider/see-mirror/
 syscall/caller
-*.tsv
 *.csv
 *.core
