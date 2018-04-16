@@ -17,7 +17,6 @@
 #define MAX_PAGE_COUNT ((1L << 32) / PAGE_SIZE)
 
 uint8_t card_table[MAX_PAGE_COUNT / 8];
-uintptr_t mww_addr_buf[OUT_BUF_LENGTH];
 
 void *allocate_heap(size_t);
 void write_to_heap(void*, size_t, uint32_t, uint32_t*);
@@ -215,6 +214,7 @@ bool protect_heap(void *heap, size_t heap_size, uint32_t fragments)
 
 bool writewatch_heap(void *heap, size_t heap_size, uint32_t fragments)
 {
+    uintptr_t mww_addr_buf[OUT_BUF_LENGTH];
     size_t fragment_size = heap_size / fragments;
 
     // Heap fragments.
@@ -224,8 +224,8 @@ bool writewatch_heap(void *heap, size_t heap_size, uint32_t fragments)
         size_t granularity = -1;
 
         do {
-            *((uint32_t*)fragment_start) = 102;
-            if (__syscall(561, (void*)fragment_start, fragment_size, 0x1, mww_addr_buf, &count, &granularity) != 0) {
+            if (__syscall(561, (void*)fragment_start, fragment_size, 0x1, &mww_addr_buf, &count, &granularity) != 0) {
+		printf("mwritewatch: failed\n");
                 return false;
             }
         } while (count == OUT_BUF_LENGTH);
