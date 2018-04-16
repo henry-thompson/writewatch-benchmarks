@@ -7,6 +7,11 @@
 
 # Usage: ./install-gc.sh [-clean] [-original] [-buffer N] [-build-gc]
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 if [ "$1" = "-clean" ]; then
     rm -rf bdwgc
 fi

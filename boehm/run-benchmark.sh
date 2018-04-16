@@ -56,6 +56,11 @@ writewatch()
   benchmark "$1-writewatch.tsv"
 }
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 prefix="results"
 
 if [ "$1" == "-results-prefix" ]; then
