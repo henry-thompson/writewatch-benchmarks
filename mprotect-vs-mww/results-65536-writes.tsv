@@ -1,0 +1,3 @@
+Heap Size (bytes)	Writes (pages)	Mean mprotect (us)	StDev mprotect (us)	Mean mwritewatch (us)	StDev mwritewatch (us)
+268435456	65536	351211.000000	231.183909	349119.000000	1740.918436
+536870912	65536	372559.000000	359.913879	998892.000000	37148.985437
