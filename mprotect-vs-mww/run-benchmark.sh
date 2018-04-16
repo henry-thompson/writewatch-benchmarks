@@ -12,7 +12,7 @@ pagesize=4096
 
 echo "heapsize,writes,fragments,mode,results" > results.unaggregated.csv
 
-for((heapsize = 4096; heapsize <= 1024*1024*512; heapsize *= 2))
+for((heapsize = 4096; heapsize <= 2*1024*1024*1024; heapsize *= 2))
 do
 	zerowritesdone="no"
 	for((writes = heapsize / $pagesize; writes >= 0; writes /= 2))
