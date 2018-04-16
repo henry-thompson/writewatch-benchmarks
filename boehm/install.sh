@@ -39,7 +39,7 @@ else
       echo "Buffer size: $1"
       shift
     else
-      echo "Default buffer: $1"
+      echo "Using default buffer size"
     fi
 fi
 
