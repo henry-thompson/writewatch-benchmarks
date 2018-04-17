@@ -20,17 +20,17 @@ benchmark()
   # Begin the benchmark. $1 is the file to save the content into.
 
   echo ">>> Running benchmark HEAP_SIZE..."
-  echo "kStretchTreeDepth	LongLivedTreeDepth	kArraySize	kMinTreeDepth	kMaxTreeDepth	GC Itertations	Heap Size	Time Elapsed\
+  echo "kStretchTreeDepth	kLongLivedTreeDepth	kArraySize	kMinTreeDepth	kMaxTreeDepth	GC Itertations	Heap Size	Time Elapsed\
 " > "$1"
 
-  for ((kStretchTreeDepth = 18; kStretchTreeDepth <= 21; kStretchTreeDepth++));
+  for ((kMaxTreeDepth = 14; kMaxTreeDepth <= 19; kMaxTreeDepth++));
   do
     for ((kLongLivedTreeDepth = 16; kLongLivedTreeDepth <= 19; kLongLivedTreeDepth++));
     do
       for ((i=1;i<=30;i++));
       do
-        echo "Iter $i: kStretchTreeDepth=$kStretchTreeDepth kLongLivedTreeDepth=$kLongLivedTreeDepth"
-        rtprio 0 ./benchmark "$kStretchTreeDepth" "$kLongLivedTreeDepth" >> "$1"
+        echo "Iter $i: kMaxTreeDepth=$kMaxTreeDepth kLongLivedTreeDepth=$kLongLivedTreeDepth"
+        rtprio 0 ./benchmark 21 "$kLongLivedTreeDepth" 5000000 4 "$kMaxTreeDepth" 16 >> "$1"
       done
     done
   done
