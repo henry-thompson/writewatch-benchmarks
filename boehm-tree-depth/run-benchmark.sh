@@ -23,6 +23,11 @@ benchmark()
     python2 aggregate.py "$1.unaggregated.tsv" > "$1.tsv"
 }
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 shortLivedTreeDepth=21
 if [ "$1" = "-short-lived-tree" ]; then
     shortLivedTreeDepth="$2"

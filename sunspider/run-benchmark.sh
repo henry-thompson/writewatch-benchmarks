@@ -1,5 +1,10 @@
 #!/usr/local/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 chmod +x ./install-see.sh
 sudo ./install-see.sh
 
