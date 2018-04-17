@@ -43,7 +43,8 @@ original()
   ./install.sh -original -build-gc
 
   # Run benchmark and save results in benchmark-baseline.tsv
-  benchmark "$1-baseline.tsv"
+  benchmark "results-baseline.tsv"
+  python2 aggregate.py baseline
 }
 
 writewatch()
@@ -53,7 +54,8 @@ writewatch()
   ./install.sh -build-gc
 
   # Run benchmark and save results in benchmark-writewatch.tsv
-  benchmark "$1-writewatch.tsv"
+  benchmark "results-writewatch.tsv"
+  python2 aggregate.py writewatch
 }
 
 if [ "$EUID" -ne 0 ]
@@ -61,21 +63,13 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-prefix="results"
-
-if [ "$1" == "-results-prefix" ]; then
-  shift
-  prefix="$1"
-  shift
-fi
-
 if [ "$1" == "-writewatch-only" ]; then
   shift
-  writewatch $prefix
+  writewatch
 elif [ "$1" == '-original-only' ]; then
   shift
-  original $prefix
+  original
 else
-  original $prefix
-  writewatch $prefix
+  original
+  writewatch
 fi
