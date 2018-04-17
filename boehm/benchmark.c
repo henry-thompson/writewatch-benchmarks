@@ -234,6 +234,9 @@ int main(int argc, char *argv[]) {
         kMaxTreeDepth = strtol(argv[5], NULL, 10);
        }
 
+       if (argc >= 7) {
+        GC_free_space_divisor = strtol(argv[6], NULL, 10);
+       }
 #ifdef GC
  // GC_full_freq = 30;
  // GC_free_space_divisor = 16;
