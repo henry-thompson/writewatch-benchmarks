@@ -30,7 +30,7 @@ benchmark()
       for ((i=1;i<=30;i++));
       do
         echo "Iter $i: kMaxTreeDepth=$kMaxTreeDepth kLongLivedTreeDepth=$kLongLivedTreeDepth"
-        rtprio 0 ./benchmark 21 "$kLongLivedTreeDepth" 5000000 4 "$kMaxTreeDepth" 16 >> "$1"
+        rtprio 0 ./benchmark 21 "$kLongLivedTreeDepth" 5000000 4 "$kMaxTreeDepth" 3 >> "$1"
       done
     done
   done
