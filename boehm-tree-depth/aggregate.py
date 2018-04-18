@@ -13,28 +13,29 @@ def stdev(data):
 
   return math.sqrt(stdev/len(data))
 
-def get_stats(treesize, heapsizes, timings):
-  if not (len(heapsizes) == len(timings)):
-    print "Heap and timing sample sizes differ!"
-    return
-  
-  print "%d\t%f\t%f\t%f\t%f" % (treesize,
+def get_stats(treesize, heapsizes, timings, gcIters):
+  print "%d\t%f\t%f\t%f\t%f\t%f\t%f" % (treesize,
                             mean(heapsizes),
                             stdev(heapsizes),
                             mean(timings),
-                            stdev(timings))
+                            stdev(timings),
+                            mean(gcIters),
+                            stdev(gcIters))
 
 with open(argv[1]) as f:
   f.readline()
 
   timings = {}
   heapsizes = {}
+  gcIters = {}
+
   for line in f.readlines():
     stretchDepth, longDepth, array, minDepth, maxDepth, gcs, heap, time = line.split('\t')
 
     longDepth = int(longDepth.strip())
     heap = int(heap.strip())
-    time = float(time.strip())
+    time = float(time.strip()) / 1000
+    gcs = int(gcs.strip())
 
     if not timings.has_key(longDepth):
         timings[longDepth] = []
@@ -42,9 +43,13 @@ with open(argv[1]) as f:
     if not heapsizes.has_key(longDepth):
         heapsizes[longDepth] = []
 
+    if not gcIters.has_key(longDepth):
+        gcIters[longDepth] = []
+ 
     timings[longDepth].append(time)
     heapsizes[longDepth].append(heap)
+    gcIters[longDepth].append(gcs)
 
-  print "Tree Depth\tMean Heap Size (bytes)\tStdDev Heap Size (bytes)\tMean Time (ms)\tStdDev Time (ms)"
+  print "Tree Depth\tMean Heap Size (bytes)\tStdDev Heap Size (bytes)\tMean Time (s)\tStdDev Time (s)\tMean GC Iters\tStdDev GC Iters"
   for depth in sorted(timings.iterkeys()):
-    get_stats(depth, heapsizes[depth], timings[depth])
+    get_stats(depth, heapsizes[depth], timings[depth], gcIters[depth])
