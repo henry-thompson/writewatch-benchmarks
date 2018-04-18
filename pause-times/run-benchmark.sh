@@ -44,7 +44,7 @@ writewatch()
 
   # === NEW GC ===
   # Build and install the GC. Specify a 16-address buffer if requested.
-  ./install.sh -buffer 16 -build-gc
+  ./install.sh -build-gc
 
   cd ../pause-times
   benchmark "$1.writewatch.tsv"

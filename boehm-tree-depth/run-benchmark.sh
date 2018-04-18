@@ -49,6 +49,6 @@ benchmark "result-baseline" "$kMaxTreeDepth"
 cd ../boehm
 
 # Now for the new version
-./install.sh -buffer 16 -build-gc
+./install.sh -build-gc
 cd "$here"
 benchmark "result-writewatch" "$kMaxTreeDepth"
