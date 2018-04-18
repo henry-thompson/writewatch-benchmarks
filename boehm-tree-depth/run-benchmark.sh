@@ -17,7 +17,7 @@ benchmark()
         for ((kLongLivedTreeDepth=16;kLongLivedTreeDepth<=25;kLongLivedTreeDepth++));
         do
             echo "Iter $i | kStretchTreeDepth $kStretchTreeDepth |  kLongLivedTreeDepth $kLongLivedTreeDepth | (kMaxTreeDepth $2)"
-            rtprio 0 ../boehm/benchmark "$kStretchTreeDepth" "$kLongLivedTreeDepth" 5000000 4 "$2" 16 >> "$1.unaggregated.tsv"
+            rtprio 0 ../boehm/benchmark "$kStretchTreeDepth" "$kLongLivedTreeDepth" 5000000 4 "$2" 3 >> "$1.unaggregated.tsv"
         done
     done
 
