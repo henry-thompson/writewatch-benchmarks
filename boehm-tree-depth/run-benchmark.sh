@@ -51,4 +51,4 @@ cd ../boehm
 # Now for the new version
 ./install.sh -build-gc
 cd "$here"
-benchmark "result-writewatch" "$kMaxTreeDepth"
+benchmark "result-mwritten" "$kMaxTreeDepth"

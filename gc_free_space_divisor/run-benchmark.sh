@@ -47,4 +47,4 @@ cd ../boehm
 # Now for the new version
 ./install.sh -build-gc
 cd "$here"
-benchmark "result-writewatch"
+benchmark "result-mwritten"

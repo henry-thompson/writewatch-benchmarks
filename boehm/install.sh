@@ -34,8 +34,8 @@ if [ "$1" = '-original' ]; then
     git checkout master
     echo "GC Selected: ORIGINAL"
 else
-    git checkout freebsd-writewatch-vdb
-    echo "GC Selected: WRITEWATCH"
+    git checkout freebsd-mwritten-vdb
+    echo "GC Selected: mwritten"
     if [ "$1" = "-buffer" ]; then
       shift
       # This is a REALLY bad way of setting the buffer length, but will do for

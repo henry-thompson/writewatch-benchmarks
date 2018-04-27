@@ -4,7 +4,7 @@
 #include <sys/syscall.h>
 #include <sys/time.h>
 
-/** Calls the mwritewatch system call to scan a given heapsize. */
+/** Calls the mwritten system call to scan a given heapsize. */
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         printf("Usage: caller heapsize bufsize [-touchpages] [-selftime]\n");

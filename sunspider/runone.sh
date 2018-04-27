@@ -1,6 +1,6 @@
 #1/bin/sh
 
-# $1 contains whether this is writewatch or baseline
+# $1 contains whether this is mwritten or baseline
 # $2 contains the filename
 
 name=`basename $2`

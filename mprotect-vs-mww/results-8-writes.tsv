@@ -1,4 +1,4 @@
-Heap Size (bytes)	Writes (pages)	Mean mprotect (us)	StDev mprotect (us)	Mean mwritewatch (us)	StDev mwritewatch (us)
+Heap Size (bytes)	Writes (pages)	Mean mprotect (us)	StDev mprotect (us)	Mean mwritten (us)	StDev mwritten (us)
 32768	8	32.000000	1.000000	6.000000	0.000000
 65536	8	33.000000	1.732051	7.000000	0.000000
 131072	8	34.000000	1.000000	9.000000	1.000000

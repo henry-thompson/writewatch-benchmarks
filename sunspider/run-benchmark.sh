@@ -37,9 +37,9 @@ cd ../sunspider
 
 for ((i = 1; i <= "$iters"; i++));
 do
-   echo "Mode: WriteWatch | Iteration: $i of $iters"
-   find ./sunspider-0.9 -name "*.js" -exec ./runone.sh writewatch {} \;
+   echo "Mode: mwritten | Iteration: $i of $iters"
+   find ./sunspider-0.9 -name "*.js" -exec ./runone.sh mwritten {} \;
 done
 
 python2 aggregate.py results-baseline.unaggregated.tsv   > results-baseline.tsv
-python2 aggregate.py results-writewatch.unaggregated.tsv > results-writewatch.tsv
+python2 aggregate.py results-mwritten.unaggregated.tsv > results-mwritten.tsv

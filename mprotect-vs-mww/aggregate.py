@@ -99,12 +99,12 @@ with open(argv[1]) as f:
   for writes in sorted(timings.iterkeys()):
     filename = "results-%s-writes.tsv" % (writes)
     with  open(filename, "w+") as f:
-      f.write("Heap Size (bytes)\tWrites (pages)\tMean mprotect (us)\tStDev mprotect (us)\tMean mwritewatch (us)\tStDev mwritewatch (us)\n")
+      f.write("Heap Size (bytes)\tWrites (pages)\tMean mprotect (us)\tStDev mprotect (us)\tMean mwritten (us)\tStDev mwritten (us)\n")
 
       for heapsize in sorted(timings[writes].iterkeys()):
         stats = get_stats(heapsize, writes,
           timings[writes][heapsize][1]["mprotect"],
-          timings[writes][heapsize][1]["mwritewatch"],
+          timings[writes][heapsize][1]["mwritten"],
           timings[writes][heapsize][1]["none"]
         )
         f.write(stats)

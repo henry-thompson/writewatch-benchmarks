@@ -7,7 +7,7 @@
 # Options:
 #
 #   -result-prefix           Prefix given to results file
-#   -writewatch-only         Only run the benchmark on the writewatch enabled
+#   -mwritten-only         Only run the benchmark on the mwritten enabled
 #                            variant of Boehm.
 #   -original-only           Only run the benchmark on the unaltered variant of
 #                            Boehm.
@@ -47,15 +47,15 @@ original()
   python2 aggregate.py baseline
 }
 
-writewatch()
+mwritten()
 {
   # === NEW GC ===
   # Build and install the GC. Specify a 16-address buffer if requested.
   ./install.sh -build-gc
 
-  # Run benchmark and save results in benchmark-writewatch.tsv
-  benchmark "results-writewatch.tsv"
-  python2 aggregate.py writewatch
+  # Run benchmark and save results in benchmark-mwritten.tsv
+  benchmark "results-mwritten.tsv"
+  python2 aggregate.py mwritten
 }
 
 if [ "$EUID" -ne 0 ]
@@ -63,13 +63,13 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-if [ "$1" == "-writewatch-only" ]; then
+if [ "$1" == "-mwritten-only" ]; then
   shift
-  writewatch
+  mwritten
 elif [ "$1" == '-original-only' ]; then
   shift
   original
 else
   original
-  writewatch
+  mwritten
 fi

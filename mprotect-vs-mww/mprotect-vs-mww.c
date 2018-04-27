@@ -23,7 +23,7 @@ void write_to_heap(void*, size_t, uint32_t, uint32_t*);
 void handler(int, siginfo_t*, void*);
 bool registerSignalHandler();
 bool protect_heap(void*, size_t, uint32_t);
-bool writewatch_heap(void*, size_t, uint32_t);
+bool mwritten_heap(void*, size_t, uint32_t);
 void shuffle(uint32_t*, size_t);
 
 void *heap_start = 0;
@@ -33,14 +33,14 @@ int main(int argc, char** argv)
     if (argc != 5) {
         printf("Usage: %s [p|w|n] [heapsize] [# pages to write] [fragment heap into n regions]\n", argv[0]);
         printf("p: Use mprotect write-watch\n");
-        printf("w: Use mwritewatch syscall\n");
+        printf("w: Use mwritten syscall\n");
         printf("n: Don't track writes (measure baseline)\n");
         printf("Heapsize must be a multiple of system page size\n");
         printf("Heap fragments must be a factor of heap size\n");
         return 0;
     }
 
-    // 'p' for mprotect; 'w' for writewatch; 'n' for none
+    // 'p' for mprotect; 'w' for mwritten; 'n' for none
     char mode = argv[1][0];
     size_t heap_size = atoi(argv[2]);
     uint32_t modify_page_target = atoi(argv[3]);
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
         write_to_heap(heap_start, heap_size, modify_page_target, page_indices);
 
         if (mode == 'w') {
-            writewatch_heap(heap_start, heap_size, heap_fragments);
+            mwritten_heap(heap_start, heap_size, heap_fragments);
         } else if (mode == 'p') {
             protect_heap(heap_start, heap_size, heap_fragments);
         }
@@ -212,7 +212,7 @@ bool protect_heap(void *heap, size_t heap_size, uint32_t fragments)
     return true;
 }
 
-bool writewatch_heap(void *heap, size_t heap_size, uint32_t fragments)
+bool mwritten_heap(void *heap, size_t heap_size, uint32_t fragments)
 {
     uintptr_t mww_addr_buf[OUT_BUF_LENGTH];
     size_t fragment_size = heap_size / fragments;
@@ -225,7 +225,7 @@ bool writewatch_heap(void *heap, size_t heap_size, uint32_t fragments)
 
         do {
             if (__syscall(561, (void*)fragment_start, fragment_size, 0x1, &mww_addr_buf, &count, &granularity) != 0) {
-		printf("mwritewatch: failed\n");
+		printf("mwritten: failed\n");
                 return false;
             }
         } while (count == OUT_BUF_LENGTH);

@@ -7,7 +7,7 @@
 # Options:
 #
 #   -result-prefix           Prefix given to results file
-#   -writewatch-only         Only run the benchmark on the writewatch enabled
+#   -mwritten-only         Only run the benchmark on the mwritten enabled
 #                            variant of Boehm.
 #   -original-only           Only run the benchmark on the unaltered variant of
 #                            Boehm.
@@ -38,7 +38,7 @@ original()
   benchmark "$1.baseline.tsv"
 }
 
-writewatch()
+mwritten()
 {
   cd ../boehm
 
@@ -47,7 +47,7 @@ writewatch()
   ./install.sh -build-gc
 
   cd ../pause-times
-  benchmark "$1.writewatch.tsv"
+  benchmark "$1.mwritten.tsv"
 }
 
 if [ "$EUID" -ne 0 ]
@@ -65,13 +65,13 @@ fi
 
 cd ../boehm
 
-if [ "$1" == "-writewatch-only" ]; then
+if [ "$1" == "-mwritten-only" ]; then
   shift
-  writewatch $prefix
+  mwritten $prefix
 elif [ "$1" == '-original-only' ]; then
   shift
   original $prefix
 else
   original $prefix
-  writewatch $prefix
+  mwritten $prefix
 fi

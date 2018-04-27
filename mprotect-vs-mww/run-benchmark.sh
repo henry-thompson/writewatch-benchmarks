@@ -23,8 +23,8 @@ do
 			echo -n "$heapsize,$writes,$fragments,mprotect," >> results.unaggregated.csv
 			./benchmark p "$heapsize" "$writes" "$fragments" >> results.unaggregated.csv
 			
-			echo "Heapsize: $heapsize | Writes: $writes | Fragments: $fragments | mwritewatch"
-			echo -n "$heapsize,$writes,$fragments,mwritewatch," >> results.unaggregated.csv
+			echo "Heapsize: $heapsize | Writes: $writes | Fragments: $fragments | mwritten"
+			echo -n "$heapsize,$writes,$fragments,mwritten," >> results.unaggregated.csv
 			./benchmark w "$heapsize" "$writes" "$fragments" >> results.unaggregated.csv
 			
 			echo "Heapsize: $heapsize | Writes: $writes | Fragments: $fragments | none"
