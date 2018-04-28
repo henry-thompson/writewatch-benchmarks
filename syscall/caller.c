@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <sys/syscall.h>
 #include <sys/time.h>
+#include <sys/mman.h>
 
 /** Calls the mwritten system call to scan a given heapsize. */
 int main(int argc, char *argv[]) {
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
     char *heap = malloc(heapsize * sizeof(char));
     uintptr_t *buffer = malloc(bufsize * sizeof(uintptr_t));
 
-    size_t granularity = 0;
+    size_t gran = 0;
 
     if (argToParse < argc && strcmp("-touchpages", argv[argToParse]) == 0) {
         argToParse++;
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]) {
     struct timeval stop, start;
 
     gettimeofday(&start, NULL);
-    syscall(561, heap, heapsize, 0, buffer, &bufsize, &granularity);
+    mwritten(heap, heapsize, 0, buffer, &bufsize, &gran);
     gettimeofday(&stop, NULL);
 
     if (argToParse < argc && strcmp("-selftime", argv[argToParse]) == 0) {

@@ -221,11 +221,11 @@ bool mwritten_heap(void *heap, size_t heap_size, uint32_t fragments)
     for (uint32_t i = 0; i < fragments; i++) {
         void *fragment_start = heap + (fragment_size * i);
         size_t count = OUT_BUF_LENGTH;
-        size_t granularity = -1;
+        size_t gran = -1;
 
         do {
-            if (__syscall(561, (void*)fragment_start, fragment_size, 0x1, &mww_addr_buf, &count, &granularity) != 0) {
-		printf("mwritten: failed\n");
+            if (mwritten((void*)fragment_start, fragment_size, MWRITTEN_CLEAR, &mww_addr_buf, &count, &gran) != 0) {
+                printf("mwritten: failed\n");
                 return false;
             }
         } while (count == OUT_BUF_LENGTH);
