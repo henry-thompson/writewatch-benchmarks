@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     struct timeval stop, start;
 
     gettimeofday(&start, NULL);
-    mwritten(heap, heapsize, 0, buffer, &bufsize, &gran);
+    mwritten(heap, heapsize, MWRITTEN_DEFAULT, buffer, &bufsize, &gran);
     gettimeofday(&stop, NULL);
 
     if (argToParse < argc && strcmp("-selftime", argv[argToParse]) == 0) {
