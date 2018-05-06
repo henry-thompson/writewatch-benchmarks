@@ -44,7 +44,7 @@ do
         # No need to give high priority---syscalls are never preempted, and since
         # that is all that is being measured no need to worry.
         truss -c -o "$timingTemp" ./caller "$heapsize" "$bufsize"
-        timing="$(grep "#561" $timingTemp | grep -Eo "[0-9]\.[0-9]+")"
+        timing="$(grep "mwritten" $timingTemp | grep -Eo "[0-9]\.[0-9]+")"
       else
         timing="$(./caller "$heapsize" "$bufsize" -selftime)"
       fi
