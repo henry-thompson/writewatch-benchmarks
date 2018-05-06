@@ -21,6 +21,8 @@ echo "=== CONFIGURING GC INSTALLATION ==="
 if [ ! -d "./bdwgc" ]; then
    git clone https://github.com/henry-thompson/bdwgc
    cd bdwgc
+   ./autogen.sh
+   ./configure
 else
    cd bdwgc
    git reset HEAD --hard
@@ -36,7 +38,7 @@ if [ "$1" = '-original' ]; then
     git reset HEAD --hard
     git clean -f
 else
-    git checkout freebsd-mwritten-vdb
+    git checkout freebsd-writewatch-vdb
     echo "GC Selected: mwritten"
     git reset HEAD --hard
     git clean -f
