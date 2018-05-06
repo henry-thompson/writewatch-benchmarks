@@ -5,7 +5,7 @@
 # present in ./bdwgc, and correctly configures the source
 # for build.
 
-# Usage: ./install-gc.sh [-clean] [-original] [-buffer N] [-build-gc]
+# Usage: ./install-gc.sh [-clean] [-original] [-force-gengc] [-buffer N] [-build-gc]
 
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
@@ -33,9 +33,13 @@ if [ "$1" = '-original' ]; then
     shift
     git checkout master
     echo "GC Selected: ORIGINAL"
+    git reset HEAD --hard
+    git clean -f
 else
     git checkout freebsd-mwritten-vdb
     echo "GC Selected: mwritten"
+    git reset HEAD --hard
+    git clean -f
     if [ "$1" = "-buffer" ]; then
       shift
       # This is a REALLY bad way of setting the buffer length, but will do for
@@ -46,6 +50,14 @@ else
     else
       echo "Using default buffer size"
     fi
+fi
+
+if [ "$1" = '-force-gengc']; then
+    shift
+    # Line 1297 is the end if the GC_init() function. Yes, we make it call
+    # GC_enable_incremental() which forces all users to use generational GC.
+    # Its not clean but it works...
+    sed -i "1297i GC_enable_incremental();\n"
 fi
 
 ./autogen.sh
