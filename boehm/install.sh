@@ -52,12 +52,13 @@ else
     fi
 fi
 
-if [ "$1" = '-force-gengc']; then
+if [ "$1" = "-force-gengc" ]; then
     shift
     # Line 1297 is the end if the GC_init() function. Yes, we make it call
     # GC_enable_incremental() which forces all users to use generational GC.
     # Its not clean but it works...
-    sed -i "1297i GC_enable_incremental();\n"
+    sed -i "" "1297i\\
+    GC_enable_incremental();" misc.c
 fi
 
 ./autogen.sh
