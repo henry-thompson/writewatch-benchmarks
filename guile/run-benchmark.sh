@@ -24,12 +24,12 @@ benchmark()
 
 # Install Boehm GC (original) and run benchmarks
 cd ../boehm
-sudo ./install.sh -original -build-gc
+sudo ./install.sh -original -force-gengc -build-gc
 cd ../guile
 benchmark "results-baseline.unaggregated.tsv" "results-baseline.tsv"
 
 # Install Boehm GC (modified) and run benchmarks
 cd ../boehm
-sudo ./install.sh -build-gc
+sudo ./install.sh -force-gengc -build-gc
 cd ../guile
 benchmark "results-mwritten.unaggregated.tsv" "results-mwritten.tsv"
