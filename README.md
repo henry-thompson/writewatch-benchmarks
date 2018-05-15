@@ -1,1 +1,14 @@
 # mwritten-benchmarks
+
+These benchmarks test the performance of the `mwritten` kernel interface across a range of workloads, benchmark suites and metrics. It is explained in far more detail in my dissertation.
+
+## Tests
+
+- boehm-tree-depth: Measures `gcbench` times across a range of short-lived tree depths whilst keeping the long-lived tree length fixed. It outputs the mean and the standard deviation of the benchmark times across 30 runs.
+- boehm: Executes the `gcbench` benchmark across a range of short- and long-lived tree depths. This outputs the mean and standard deviation of the benchmark times across 30 runs at each configuration.
+- gc_free_space_divisor: Measures `gcbench` times varying the `GC_free_space_divisor` parameter between 1 and 5. Aggregates runtimes across 30 samples per configuration for mean and standard deviations.
+- guile: Installs the latest versions of Boehm GC, GUILE and the Larceny benchmarks, compiling and linking them as appropriate. It executes the Larceny benchmarks 30 iterations and extracts wall-clock time from the outputted log files, aggregating them for mean and standard deviation.
+- mprotect-vs-mww: Runs a benchmark which emulates a garbage collector calling `mwritten`. It allocates a heap using `mmap` and writes to it in a pattern reflective of real-world programs, exhibiting spatial locality and occasionally switching to a new working set. It compares tracking writes by catching write faults against using `mwritten`, measuring all overheads associated with the methods rather than just system call time. The test program can be configured to measure the times taken to scan this heap using `mwritten`- or `mprotect`-based approach, as well as without write tracking. The `run-benchmark.sh` script runs this across a wide range of all values. The figures are aggregated across 100 runs with each configuration for mean and standard deviation. The mean and variance for each technique is subtracted from the baseline measurement without write tracking.
+- pause-times: Runs Boehm GC with verbose logging enabled. The log output is processed to extract stop-the-world pause times for 100 iterations with both the original write tracking mechanism and with `mwritten`. Stop-the-world pause times are aggregated for mean and standard deviations.
+- sunspider: Installs the Simple ECMAScript Engine modified to use incremental GC, links it with the correct installation of Boehm GC, and executes all the `*.js` files found within the `sunspider-0.9` subdirectory for a configurable number of iterations. Aggregates the wall-clock, kernel and userspace times for mean and standard deviations.
+- syscall: Measures time taken to query for writes across a range of heap sizes, varying the address buffer size and whether the heap should be unmodified or written to. Mean and standard deviations taken across 100 runs.
